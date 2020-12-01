@@ -5,18 +5,18 @@ import java.io.*;
 
 public class ReportRepairPart1 {
     
-    public static Integer[] readFile(String filePath) throws FileNotFoundException{
+    public static Integer[] readFile(String filePath) throws FileNotFoundException {
         
         Scanner fileReader = new Scanner(new File(filePath));
         ArrayList<Integer> data = new ArrayList<Integer>();
         
-        while (fileReader.hasNextInt()){
+        while (fileReader.hasNextInt()) {
             data.add(fileReader.nextInt());
         }
         return data.toArray(new Integer[data.size()]);
     }
     
-    public static void main(String[] args){
+    public static void main(String[] args) {
         
         Integer[] data = new Integer[0];
         try {
