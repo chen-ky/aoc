@@ -6,7 +6,6 @@ import java.io.*;
 public class ReportRepairPart1 {
     
     public static Integer[] readFile(String filePath) throws FileNotFoundException {
-        
         Scanner fileReader = new Scanner(new File(filePath));
         ArrayList<Integer> data = new ArrayList<Integer>();
         
@@ -16,8 +15,19 @@ public class ReportRepairPart1 {
         return data.toArray(new Integer[data.size()]);
     }
     
+    public static Integer solve(Integer[] data) {
+        for (Integer num1 : data) {
+            boolean matched = false;
+            for (Integer num2 : data) {
+                if (num1.intValue() + num2.intValue() == 2020) {
+                    return num1 * num2;
+                }
+            }
+        }
+        return null;
+    }
+
     public static void main(String[] args) {
-        
         Integer[] data = new Integer[0];
         try {
             data = readFile("input");
@@ -26,19 +36,6 @@ public class ReportRepairPart1 {
             System.exit(1);
         }
 
-        for (Integer num1 : data) {
-            boolean matched = false;
-            for (Integer num2 : data) {
-                if (num1.intValue() + num2.intValue() == 2020) {
-                    System.out.println(num1 * num2);
-                    matched = true;
-                    break;
-                }
-            }
-            if (matched) {
-                break;
-            }
-        }
-
+        System.out.println(solve(data));
     }
 }
