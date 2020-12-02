@@ -1,5 +1,4 @@
 use std::fs;
-use std::cmp::Ordering;
 
 fn file_parser(file_path: &str) -> Vec<u32> {
     // Read file
@@ -32,13 +31,10 @@ fn solve_part_1(data: &Vec<u32>) -> u32 {
             
             // Find solution
             let num2 = data[j];
-            match 2020.cmp(&(num1 + num2)) {
-                Ordering::Less => j += 1,
-                Ordering::Greater => j += 1,
-                Ordering::Equal => {
-                    return num1 * num2
-                }
+            if 2020 == (num1 + num2) {
+                return num1 * num2
             }
+            j += 1;
         }
         i += 1;
     }
@@ -60,15 +56,12 @@ fn solve_part_2(data: &Vec<u32>) -> u32 {
             loop {
                 if k == data.len() { break; }
 
-                let num3 = data[k];
                 // Find solution
-                match 2020.cmp(&(num1 + num2 + num3)) {
-                    Ordering::Less => k += 1,
-                    Ordering::Greater => k += 1,
-                    Ordering::Equal => {
-                        return num1 * num2 * num3
-                    }
+                let num3 = data[k];
+                if 2020 == (num1 + num2 + num3) {
+                    return num1 * num2 * num3
                 }
+                k += 1;
             }
             j += 1;
         }
