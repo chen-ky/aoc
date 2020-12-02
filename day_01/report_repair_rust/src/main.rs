@@ -21,14 +21,10 @@ fn file_parser(file_path: &str) -> Vec<u32> {
 
 fn solve_part_1(data: &Vec<u32>) -> u32 {
     let mut i = 0;
-    loop {
-        if i == data.len() { break; }
-
+    while i < data.len() {
         let num1 = data[i];
         let mut j = 0;
-        loop {
-            if j == data.len() { break; }
-            
+        while j < data.len() {
             // Find solution
             let num2 = data[j];
             if 2020 == (num1 + num2) {
@@ -43,19 +39,13 @@ fn solve_part_1(data: &Vec<u32>) -> u32 {
 
 fn solve_part_2(data: &Vec<u32>) -> u32 {
     let mut i = 0;
-    loop {
-        if i == data.len() { break; }
-
+    while i < data.len() {
         let num1 = data[i];
         let mut j = 0;
-        loop {
-            if j == data.len() { break; }
-            
+        while j < data.len() {
             let num2 = data[j];
             let mut k = 0;
-            loop {
-                if k == data.len() { break; }
-
+            while k < data.len() {
                 // Find solution
                 let num3 = data[k];
                 if 2020 == (num1 + num2 + num3) {
