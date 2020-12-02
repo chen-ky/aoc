@@ -3,7 +3,7 @@
 import java.util.*;
 import java.io.*;
 
-public class ReportRepairPart2 {
+public class ReportRepair {
     
     public static Integer[] readFile(String filePath) throws FileNotFoundException {
         Scanner fileReader = new Scanner(new File(filePath));
@@ -14,8 +14,19 @@ public class ReportRepairPart2 {
         }
         return data.toArray(new Integer[data.size()]);
     }
+    
+    public static Integer solvePart1(Integer[] data) {
+        for (Integer num1 : data) {
+            for (Integer num2 : data) {
+                if (num1.intValue() + num2.intValue() == 2020) {
+                    return num1 * num2;
+                }
+            }
+        }
+        return null;
+    }
 
-    public static Integer solve(Integer[] data) {
+    public static Integer solvePart2(Integer[] data) {
         for (Integer num1 : data) {
             for (Integer num2 : data) {
                 for (Integer num3 : data) {
@@ -27,7 +38,7 @@ public class ReportRepairPart2 {
         }
         return null;
     }
-    
+
     public static void main(String[] args) {
         Integer[] data = new Integer[0];
         try {
@@ -37,6 +48,7 @@ public class ReportRepairPart2 {
             System.exit(1);
         }
 
-        System.out.println(solve(data));
+        System.out.printf("Part 1: %d\n", solvePart1(data));
+        System.out.printf("Part 2: %d\n", solvePart2(data));
     }
 }
