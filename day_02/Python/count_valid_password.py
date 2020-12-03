@@ -66,6 +66,7 @@ def main():
     except FileNotFoundError as e:
         sys.stderr.write(e + "\n")
         sys.exit(1)
+        
     valid_password_counter_part1 = 0
     valid_password_counter_part2 = 0
     for line in file_content:
