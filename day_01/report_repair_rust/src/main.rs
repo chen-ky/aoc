@@ -2,8 +2,7 @@ use std::fs;
 
 fn file_parser(file_path: &str) -> Vec<u32> {
     // Read file
-    let file_content = fs::read_to_string(file_path)
-        .expect("Error reading file");
+    let file_content = fs::read_to_string(file_path).expect("Error reading file");
 
     // Split and parse string to u32
     let file_content = file_content.split_whitespace();
@@ -16,7 +15,7 @@ fn file_parser(file_path: &str) -> Vec<u32> {
         data.push(num);
     }
 
-    return data
+    return data;
 }
 
 fn solve_part_1(data: &Vec<u32>) -> u32 {
@@ -28,13 +27,13 @@ fn solve_part_1(data: &Vec<u32>) -> u32 {
             // Find solution
             let num2 = data[j];
             if 2020 == (num1 + num2) {
-                return num1 * num2
+                return num1 * num2;
             }
             j += 1;
         }
         i += 1;
     }
-    return 0
+    return 0;
 }
 
 fn solve_part_2(data: &Vec<u32>) -> u32 {
@@ -49,7 +48,7 @@ fn solve_part_2(data: &Vec<u32>) -> u32 {
                 // Find solution
                 let num3 = data[k];
                 if 2020 == (num1 + num2 + num3) {
-                    return num1 * num2 * num3
+                    return num1 * num2 * num3;
                 }
                 k += 1;
             }
@@ -57,12 +56,12 @@ fn solve_part_2(data: &Vec<u32>) -> u32 {
         }
         i += 1;
     }
-    return 0
+    return 0;
 }
 
 fn main() {
-    let data = file_parser("resources/input"); 
-    
+    let data = file_parser("resources/input");
+
     println!("Part 1 solution: {}", solve_part_1(&data));
     println!("Part 2 solution: {}", solve_part_2(&data));
 }
