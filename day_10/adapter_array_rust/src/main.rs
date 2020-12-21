@@ -41,7 +41,9 @@ fn possible_combinations(file_content: &Vec<u32>, start: u32, end: u32, cache: &
             if cache.contains_key(&num) {
                 combinations += cache.get(&num).unwrap();
             } else {
-                combinations += possible_combinations(&file_content, num, end, cache);
+                let result = possible_combinations(&file_content, num, end, cache);
+                cache.insert(num, result);
+                combinations += result;
             }
         }
     } else {
