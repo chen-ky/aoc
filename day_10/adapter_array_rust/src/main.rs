@@ -1,5 +1,6 @@
 use std::env;
 use std::fs;
+use std::collections::HashMap;
 
 // All functions assume Vector is sorted.
 
@@ -13,9 +14,7 @@ fn parse_file(file_path: &String) -> Vec<u32> {
     file_content
 }
 
-// Works on small example, takes too long to run on actual input
-fn possible_combinations(file_content: &Vec<u32>, start: u32, end: u32) -> u128 {
-    // println!("Start: {}, End: {}", start, end);
+fn possible_combinations(file_content: &Vec<u32>, start: u32, end: u32, cache: &mut HashMap<u32, u128>) -> u128 {
     let mut compatible_adapter: Vec<u32> = Vec::new();
     for num in file_content {
         if *num > start && *num <= start + 3 {
@@ -29,18 +28,25 @@ fn possible_combinations(file_content: &Vec<u32>, start: u32, end: u32) -> u128 
         if compatible_adapter[0] == end {
             // Base case
             return combinations;
+        } else if cache.contains_key(&compatible_adapter[0]){
+            combinations *= cache.get(&compatible_adapter[0]).unwrap();
         } else {
-            combinations *= possible_combinations(&file_content, compatible_adapter[0], end);
+            let result = possible_combinations(&file_content, compatible_adapter[0], end, cache);
+            cache.insert(compatible_adapter[0], result);
+            combinations *= result;
         }
     } else if compatible_adapter.len() > 1 {
         combinations = 0;
         for num in compatible_adapter {
-            combinations += possible_combinations(&file_content, num, end);
+            if cache.contains_key(&num) {
+                combinations += cache.get(&num).unwrap();
+            } else {
+                combinations += possible_combinations(&file_content, num, end, cache);
+            }
         }
     } else {
         panic!("Invalid input?");
     }
-    // println!("{}", combinations);
     combinations
 }
 
@@ -79,6 +85,6 @@ fn main() {
     );
     println!(
         "All possible adapter combinations (Part 2): {}",
-        possible_combinations(&file_content, 0, file_content[file_content.len() - 1])
+        possible_combinations(&file_content, 0, file_content[file_content.len() - 1], &mut HashMap::new())
     );
 }
