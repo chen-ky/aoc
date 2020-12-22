@@ -63,6 +63,7 @@ public class HandyHaversacks {
                 if (evaluated.contains(seenColours.get(key))) {
                     continue;
                 }
+
                 Node currentNode = seenColours.get(key);
                 if (result.contains(currentNode)) {
                     continue;
@@ -72,6 +73,7 @@ public class HandyHaversacks {
                 if (currentNode.children.contains(seenColours.get("shiny gold"))) {
                     result.add(currentNode);
                 } else {
+                    // If any currentNode children is in result, the colour can also contain shiny gold bag.
                     for (Node colour : currentNode.children) {
                         if (result.contains(colour)) {
                             result.add(currentNode);
@@ -89,6 +91,7 @@ public class HandyHaversacks {
         return result;
     }
 
+    /** Find children count of specified Node recursively */
     public static int findChildrenCount(Node startNode) {
         if (startNode.children == null) {
             return 0;
